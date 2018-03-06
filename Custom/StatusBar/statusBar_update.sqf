@@ -1,5 +1,5 @@
 /*
-	New Stats Bar - Based on Stats Bar by Creampie
+	Exile Status Bar by [FPS]kuplion - Based on Stats Bar by Creampie
 */
 
 // Accurate Restarts
