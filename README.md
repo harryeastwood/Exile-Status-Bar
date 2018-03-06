@@ -1,6 +1,6 @@
-/*
-	Exile Status Bar by [FPS]kuplion - Based on Stats Bar by Creampie
-*/
+# Exile Status Bar by [FPS]kuplion - Based on Stats Bar by Creampie
+
+## Features
 
 * Built to utilise the Exile threading system for better performance.
 
