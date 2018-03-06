@@ -1,7 +1,5 @@
 # Exile Status Bar by [FPS]kuplion - Based on Stats Bar by Creampie
 
-## Features
-
 * Built to utilise the Exile threading system for better performance.
 
 * Icons are from ExAd, with permission of MonkeyNutz.
