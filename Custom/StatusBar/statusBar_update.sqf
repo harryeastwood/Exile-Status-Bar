@@ -1,5 +1,5 @@
 /*
-	Exile Status Bar by [FPS]kuplion - Based on Stats Bar by Creampie
+	New Stats Bar - Based on Stats Bar by Creampie
 */
 
 // Accurate Restarts
@@ -19,7 +19,7 @@ disableSerialization;
 
 // systemChat format["StatusBar Initialized", _rscLayer];
 
-// Check if Status Bar is showing and restart if not..
+// Check case Status Bar is showing and restart case not..
 if (isNull ((uiNamespace getVariable "StatusBar")displayCtrl 55554)) then
 {
 	diag_log "Status Bar is Null! Restarting..";
@@ -57,12 +57,24 @@ _damage			= round ((1 - (damage player)) * 100);
 _hunger			= round (ExileClientPlayerAttributes select 2);
 _thirst			= round (ExileClientPlayerAttributes select 3);
 _wallet			= (player getVariable ["ExileMoney", 0]);
+if (_wallet > 999) then
+{
+	_wallet = format ["%1k", floor (_wallet / 1000)];
+};
 _locker			= (player getVariable ["ExileLocker", 0]);
+if (_locker > 999) then
+{
+	_locker = format ["%1k", floor (_locker / 1000)];
+};
 _respect		= ExileClientPlayerScore;
+if (_respect > 999) then
+{
+	_respect = format ["%1k", floor (_respect / 1000)];
+};
 _energyPercent	= 100;
 _playerFPS		= round diag_fps;
 _dir			= round (getDir (vehicle player));
-_rightTime		= (((_correcTime select 0) - startHour) - startMinute/60) * 60;
+_rightTime		= (((_correcTime select 0) - _startHour) - _startMinute/60) * 60;
 _time			= (round(_rightTime - (serverTime)/60));
 _hours			= (floor(_time/60));
 _minutes		= (_time - (_hours * 60));
@@ -83,49 +95,58 @@ switch (_minutes) do
 
 // Colour coding
 //Damage
-_colourDamage = _colourDefault;
-if (_damage >= 100) then {_colourDamage = _colour100;};
-if ((_damage >= 90) && (_damage < 100)) then {_colourDamage =  _colour100;};
-if ((_damage >= 80) && (_damage < 90)) then {_colourDamage =  _colour80;};
-if ((_damage >= 70) && (_damage < 80)) then {_colourDamage =  _colour70;};
-if ((_damage >= 60) && (_damage < 70)) then {_colourDamage =  _colour60;};
-if ((_damage >= 50) && (_damage < 60)) then {_colourDamage =  _colour50;};
-if ((_damage >= 40) && (_damage < 50)) then {_colourDamage =  _colour40;};
-if ((_damage >= 30) && (_damage < 40)) then {_colourDamage =  _colour30;};
-if ((_damage >= 20) && (_damage < 30)) then {_colourDamage =  _colour20;};
-if ((_damage >= 10) && (_damage < 20)) then {_colourDamage =  _colour10;};
-if ((_damage >= 1) && (_damage < 10)) then {_colourDamage =  _colour0;};
-if (_damage < 1) then {_colourDamage =  _colourDead;};
+switch (true) do
+{
+	case (_damage >= 100) : {_colourDamage = _colour100;};
+	case ((_damage >= 90) && (_damage < 100)) : {_colourDamage =  _colour100;};
+	case ((_damage >= 80) && (_damage < 90)) : {_colourDamage =  _colour80;};
+	case ((_damage >= 70) && (_damage < 80)) : {_colourDamage =  _colour70;};
+	case ((_damage >= 60) && (_damage < 70)) : {_colourDamage =  _colour60;};
+	case ((_damage >= 50) && (_damage < 60)) : {_colourDamage =  _colour50;};
+	case ((_damage >= 40) && (_damage < 50)) : {_colourDamage =  _colour40;};
+	case ((_damage >= 30) && (_damage < 40)) : {_colourDamage =  _colour30;};
+	case ((_damage >= 20) && (_damage < 30)) : {_colourDamage =  _colour20;};
+	case ((_damage >= 10) && (_damage < 20)) : {_colourDamage =  _colour10;};
+	case ((_damage >= 1) && (_damage < 10)) : {_colourDamage =  _colour0;};
+	case (_damage < 1) : {_colourDamage =  _colourDead;};
+	default : {_colourDamage = _colourDefault;};
+};
 
 // Hunger
-_colourHunger = _colourDefault;
-if (_hunger >= 100) then {_colourHunger = _colour100;};
-if ((_hunger >= 90) && (_hunger < 100)) then {_colourHunger =  _colour90;};
-if ((_hunger >= 80) && (_hunger < 90)) then {_colourHunger =  _colour80;};
-if ((_hunger >= 70) && (_hunger < 80)) then {_colourHunger =  _colour70;};
-if ((_hunger >= 60) && (_hunger < 70)) then {_colourHunger =  _colour60;};
-if ((_hunger >= 50) && (_hunger < 60)) then {_colourHunger =  _colour50;};
-if ((_hunger >= 40) && (_hunger < 50)) then {_colourHunger =  _colour40;};
-if ((_hunger >= 30) && (_hunger < 40)) then {_colourHunger =  _colour30;};
-if ((_hunger >= 20) && (_hunger < 30)) then {_colourHunger =  _colour20;};
-if ((_hunger >= 10) && (_hunger < 20)) then {_colourHunger =  _colour10;};
-if ((_hunger >= 1) && (_hunger < 10)) then {_colourHunger =  _colour0;};
-if (_hunger < 1) then {_colourHunger =  _colourDead;};
+switch (true) do
+{
+	case (_hunger >= 100) : {_colourHunger = _colour100;};
+	case ((_hunger >= 90) && (_hunger < 100)) : {_colourHunger =  _colour90;};
+	case ((_hunger >= 80) && (_hunger < 90)) : {_colourHunger =  _colour80;};
+	case ((_hunger >= 70) && (_hunger < 80)) : {_colourHunger =  _colour70;};
+	case ((_hunger >= 60) && (_hunger < 70)) : {_colourHunger =  _colour60;};
+	case ((_hunger >= 50) && (_hunger < 60)) : {_colourHunger =  _colour50;};
+	case ((_hunger >= 40) && (_hunger < 50)) : {_colourHunger =  _colour40;};
+	case ((_hunger >= 30) && (_hunger < 40)) : {_colourHunger =  _colour30;};
+	case ((_hunger >= 20) && (_hunger < 30)) : {_colourHunger =  _colour20;};
+	case ((_hunger >= 10) && (_hunger < 20)) : {_colourHunger =  _colour10;};
+	case ((_hunger >= 1) && (_hunger < 10)) : {_colourHunger =  _colour0;};
+	case (_hunger < 1) : {_colourHunger =  _colourDead;};
+	default : {_colourHunger = _colourDefault;};
+};
 
 // Thirst
-_colourThirst = _colourDefault;		
-if (_thirst >= 100) then {_colourThirst = _colour101;};
-if ((_thirst >= 90) && (_thirst < 100)) then {_colourThirst =  _colour102;};
-if ((_thirst >= 80) && (_thirst < 90)) then {_colourThirst =  _colour103;};
-if ((_thirst >= 70) && (_thirst < 80)) then {_colourThirst =  _colour104;};
-if ((_thirst >= 60) && (_thirst < 70)) then {_colourThirst =  _colour105;};
-if ((_thirst >= 50) && (_thirst < 60)) then {_colourThirst =  _colour106;};
-if ((_thirst >= 40) && (_thirst < 50)) then {_colourThirst =  _colour107;};
-if ((_thirst >= 30) && (_thirst < 40)) then {_colourThirst =  _colour108;};
-if ((_thirst >= 20) && (_thirst < 30)) then {_colourThirst =  _colour20;};
-if ((_thirst >= 10) && (_thirst < 20)) then {_colourThirst =  _colour10;};
-if ((_thirst >= 1) && (_thirst < 10)) then {_colourThirst =  _colour0;};
-if (_thirst < 1) then {_colourThirst =  _colourDead;};
+switch (true) do
+{
+	case (_thirst >= 100) : {_colourThirst = _colour101;};
+	case ((_thirst >= 90) && (_thirst < 100)) : {_colourThirst =  _colour102;};
+	case ((_thirst >= 80) && (_thirst < 90)) : {_colourThirst =  _colour103;};
+	case ((_thirst >= 70) && (_thirst < 80)) : {_colourThirst =  _colour104;};
+	case ((_thirst >= 60) && (_thirst < 70)) : {_colourThirst =  _colour105;};
+	case ((_thirst >= 50) && (_thirst < 60)) : {_colourThirst =  _colour106;};
+	case ((_thirst >= 40) && (_thirst < 50)) : {_colourThirst =  _colour107;};
+	case ((_thirst >= 30) && (_thirst < 40)) : {_colourThirst =  _colour108;};
+	case ((_thirst >= 20) && (_thirst < 30)) : {_colourThirst =  _colour20;};
+	case ((_thirst >= 10) && (_thirst < 20)) : {_colourThirst =  _colour10;};
+	case ((_thirst >= 1) && (_thirst < 10)) : {_colourThirst =  _colour0;};
+	case (_thirst < 1) : {_colourThirst =  _colourDead;};
+	default : {_colourThirst = _colourDefault;};
+};
 
 // Display the information 
 ((uiNamespace getVariable "StatusBar")displayCtrl 55554)ctrlSetStructuredText parseText 
