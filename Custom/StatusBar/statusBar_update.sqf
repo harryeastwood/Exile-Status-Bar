@@ -3,11 +3,11 @@
 */
 
 // Accurate Restarts
-_restartTimes = [0,3,6,9,12,15,18,21,24]; // Military Time
-_startHour = ExileServerStartTime select 3;
-_startMinute = ExileServerStartTime select 4;
-_startSecond = ExileServerStartTime select 5;
-_correcTime = [];
+_restartTimes	= [0,3,6,9,12,15,18,21,24]; // Military Time
+_startHour		= ExileServerStartTime select 3;
+_startMinute	= ExileServerStartTime select 4;
+_startSecond	= ExileServerStartTime select 5;
+_correcTime		= [];
 {
 	if (_startHour < _x and _startHour != 24) then
 	{
@@ -17,9 +17,9 @@ _correcTime = [];
 
 disableSerialization;
 
-// systemChat format["StatusBar Initialized", _rscLayer];
+//systemChat format["StatusBar Initialized", _rscLayer];
 
-// Check case Status Bar is showing and restart case not..
+// Check if Status Bar is showing and restart if not..
 if (isNull ((uiNamespace getVariable "StatusBar")displayCtrl 55554)) then
 {
 	diag_log "Status Bar is Null! Restarting..";
@@ -93,8 +93,8 @@ switch (_minutes) do
 	case 0: {_minutes = "00"};
 };
 
-// Colour coding
-//Damage
+// Damage
+_colourDamage = _colourDefault;
 switch (true) do
 {
 	case (_damage >= 100) : {_colourDamage = _colour100;};
@@ -109,10 +109,11 @@ switch (true) do
 	case ((_damage >= 10) && (_damage < 20)) : {_colourDamage =  _colour10;};
 	case ((_damage >= 1) && (_damage < 10)) : {_colourDamage =  _colour0;};
 	case (_damage < 1) : {_colourDamage =  _colourDead;};
-	default : {_colourDamage = _colourDefault;};
+	default {_colourDamage = _colourDefault;};
 };
 
 // Hunger
+_colourHunger = _colourDefault;
 switch (true) do
 {
 	case (_hunger >= 100) : {_colourHunger = _colour100;};
@@ -127,10 +128,11 @@ switch (true) do
 	case ((_hunger >= 10) && (_hunger < 20)) : {_colourHunger =  _colour10;};
 	case ((_hunger >= 1) && (_hunger < 10)) : {_colourHunger =  _colour0;};
 	case (_hunger < 1) : {_colourHunger =  _colourDead;};
-	default : {_colourHunger = _colourDefault;};
+	default {_colourHunger = _colourDefault;};
 };
 
 // Thirst
+_colourThirst = _colourDefault;
 switch (true) do
 {
 	case (_thirst >= 100) : {_colourThirst = _colour101;};
@@ -145,7 +147,7 @@ switch (true) do
 	case ((_thirst >= 10) && (_thirst < 20)) : {_colourThirst =  _colour10;};
 	case ((_thirst >= 1) && (_thirst < 10)) : {_colourThirst =  _colour0;};
 	case (_thirst < 1) : {_colourThirst =  _colourDead;};
-	default : {_colourThirst = _colourDefault;};
+	default {_colourThirst = _colourDefault;};
 };
 
 // Display the information 
