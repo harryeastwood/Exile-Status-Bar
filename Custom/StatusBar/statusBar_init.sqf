@@ -2,9 +2,6 @@
 	Exile Status Bar by [FPS]kuplion - Based on Stats Bar by Creampie
 */
  
-// Load Hud
-// [] execVM "Custom\StatsBar\statusBar_init.sqf.sqf";
-
 private ['_code', '_function', '_file'];
 {
     _code = '';
