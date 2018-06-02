@@ -57,32 +57,35 @@ _damage			= round ((1 - (damage player)) * 100);
 _hunger			= round (ExileClientPlayerAttributes select 2);
 _thirst			= round (ExileClientPlayerAttributes select 3);
 _wallet			= (player getVariable ["ExileMoney", 0]);
+
+_wallet			= (player getVariable ["ExileMoney", 0]);
 if ((_wallet > 999) && (_wallet < 1000000)) then
 {
-	_wallet = format ["%1k", floor (_wallet / 1000)];
+    _wallet = format ["%1k", parseNumber ((_wallet / 1000) toFixed 1)];
 };
 if (_wallet > 999999) then
 {
-	_wallet = format ["%1M", (_wallet / 1000000) toFixed 1];
+	_wallet = format ["%1M", parseNumber ((_wallet / 1000000) toFixed 1)];
 };
-_locker			= (player getVariable ["ExileLocker", 0]);
+_locker            = (player getVariable ["ExileLocker", 0]);
 if ((_locker > 999) && (_locker < 1000000)) then
 {
-	_locker = format ["%1k", floor (_locker / 1000)];
+    _locker = format ["%1k", parseNumber ((_locker / 1000) toFixed 1)];
 };
 if (_locker > 999999) then
 {
-	_locker = format ["%1M", (_locker / 1000000) toFixed 1];
+	_locker = format ["%1M", parseNumber ((_locker / 1000000) toFixed 1)];
 };
-_respect		= ExileClientPlayerScore;
+_respect        = ExileClientPlayerScore;
 if ((_respect > 999) && (_respect < 1000000)) then
 {
-	_respect = format ["%1k", floor (_respect / 1000)];
+    _respect = format ["%1k", parseNumber ((_respect / 1000) toFixed 1)];
 };
 if (_respect > 999999) then
 {
-	_respect = format ["%1M", (_respect / 1000000) toFixed 1];
+	_respect = format ["%1M", parseNumber ((_respect / 1000000) toFixed 1)];
 };
+
 _energyPercent	= 100;
 _playerFPS		= round diag_fps;
 _dir			= round (getDir (vehicle player));
