@@ -151,6 +151,23 @@ switch (true) do
 	default {_colourThirst = _colourDefault;};
 };
 
+// Grid and Height
+_grid = mapGridPosition player;
+_gridFirst = _grid select [0,3];
+_gridSecond = _grid select [3];
+_playerHeightASL = (getPosASL player) select 2;
+_playerHeightATL = (getPosATL player) select 2;
+_playerHeight = 0;
+
+if (_playerHeightASL <= _playerHeightATL) then
+{
+    _playerHeight = _playerHeightASL;
+} else
+{
+    _playerHeight = _playerHeightATL;
+};
+_playerHeightRound = round _playerHeight;
+
 // Display the information 
 ((uiNamespace getVariable "StatusBar")displayCtrl 55554)ctrlSetStructuredText parseText 
 format[
@@ -168,6 +185,10 @@ format[
 <t shadow='1' shadowColor='#000000' size='1.1' color='%12'><img size='1.1'  shadowColor='#000000' image='Custom\StatusBar\Icons\hunger.paa' color='%12'/> %5%1  </t>
 
 <t shadow='1' shadowColor='#000000' size='1.1' color='%13'><img size='1.1'  shadowColor='#000000' image='Custom\StatusBar\Icons\thirst.paa' color='%13'/> %6%1  </t>
+
+<t shadow='1' shadowColor='#000000' size='1.1' color='%10'><img size='1.1'  shadowColor='#000000' image='Custom\StatusBar\Icons\location.paa' color='%10'/> %18|%19  </t>
+
+<t shadow='1' shadowColor='#000000' size='1.1' color='%10'><img size='1.1'  shadowColor='#000000' image='Custom\StatusBar\Icons\altimeter.paa' color='%10'/> %20m  </t>
 
 <t shadow='1' shadowColor='#000000' size='1.1' color='%10'><img size='1.1'  shadowColor='#000000' image='Custom\StatusBar\Icons\compass.paa' color='%10'/> %14  </t>
 
@@ -191,5 +212,8 @@ _colourThirst,				//13
 _dir,						//14
 _hours,						//15
 _minutes,					//16
-_locker						//17
+_locker,					//17
+_gridFirst,					//18
+_gridSecond,					//19
+_playerHeightRound				//20
 ];
